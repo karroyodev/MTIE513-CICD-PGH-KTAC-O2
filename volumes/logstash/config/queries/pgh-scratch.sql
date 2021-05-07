@@ -2,7 +2,7 @@ select  ph.prestamosphid, ph.afiliadorfc, a.afiliadofnacmiento, s.sexodesc, ea.e
 d.dependenciadesc, o.obligaciondesc,
 ph.sueldobase, ph.phfregistro, ph.phfaprobacion, ph.phfcomprometido, ph.phnopagos, ph.phimporte, 
 ep.estatusphdesc
-FROM mtie_dbpgh.prestamosph ph on ph.prestamosphid = j.prestamosphid
+FROM mtie_dbpgh.prestamosph ph 
 inner join mtie_dbpgh.catafiliado a on a.afiliadorfc = ph.afiliadorfc
 inner join mtie_dbpgh.catsexo s on s.sexoid = a.sexoid
 inner join mtie_dbpgh.catestatusaf ea on ea.estatusafid = a.estatusafid
