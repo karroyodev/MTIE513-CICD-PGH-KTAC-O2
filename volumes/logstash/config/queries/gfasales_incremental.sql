@@ -1,18 +1,7 @@
-select  j.journal_id, j.prestamosphid ,j.action_type,
-ph.prestamosphid, ph.afiliadorfc, a.afiliadofnacmiento, s.sexodesc, ea.estatusafdesc, m.municipiodesc, e.estadodesc,
-d.dependenciadesc, o.obligaciondesc,
-ph.sueldobase, ph.phfregistro, ph.phfaprobacion, ph.phfcomprometido, ph.phnopagos, ph.phimporte, 
-ep.estatusphdesc
-FROM mtie_dbpgh.prestamosph_journal j
-left join mtie_dbpgh.prestamosph ph on ph.prestamosphid = j.prestamosphid
-inner join mtie_dbpgh.catafiliado a on a.afiliadorfc = ph.afiliadorfc
-inner join mtie_dbpgh.catsexo s on s.sexoid = a.sexoid
-inner join mtie_dbpgh.catestatusaf ea on ea.estatusafid = a.estatusafid
-inner join mtie_dbpgh.catmunicipio m on m.municipioid = a.municipioid
-inner join mtie_dbpgh.catestado e on e.estadoid = m.estadoid
-inner join mtie_dbpgh.catdependencia d on (d.dependenciacve = ph.dependenciacve && d.dependenciaclasif = ph.dependenciaclasif)
-inner join mtie_dbpgh.catobligacion o on o.obligacionid = ph.obligacionid
-inner join mtie_dbpgh.catestatusph ep on ep.estatusphid = ph.estatusphid
+SELECT j.journal_id, j.sale_id ,j.action_type,
+		s.sale_id, s.officeCode, s.salesKey, s.destination, s.saleDate, s.serviceClass, s.serviceNumber, s.serviceTime, s.origin, s.serviceDate, s.category, s.price, s.saleTime, s.discount
+FROM adventure.gfasales_journal j
+INNER JOIN adventure.gfasales s ON s.sale_id = j.sale_id
 WHERE j.journal_id > :sql_last_value
 		AND j.action_time < NOW()
 ORDER BY j.journal_id
